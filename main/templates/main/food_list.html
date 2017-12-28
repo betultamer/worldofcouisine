@@ -1,0 +1,14 @@
+
+
+ {% for food in food_query  %}
+
+ <div  class="col-md-3 col-sm-4 col-xs-6 single_portfolio_text">
+     <img width=250 height=250 src="/media/{{ food.cover }}" alt="" />
+     <div class="portfolio_images_overlay text-center">
+         <h6> <a  style="color: orange;"href="{% url 'food' food.title|slugify food.id %}" >{{food.title |truncatechars:20}} </a></h6>
+          <h6 class="product_price">{{ food.cuisine.name }} </h6>
+         <a href="{% url 'food' food.title|slugify food.id %}" class="btn btn-primary">Tarif için tıkla</a>
+     </div>
+ </div>
+
+ {% endfor %}

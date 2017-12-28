@@ -1,0 +1,115 @@
+{% extends "main/base.html" %}
+
+{% block tarif %}
+<section id="abouts" class="abouts">
+            <div class="container" style="padding-top:100px; padding-bottom:100px">
+                <div class="row">
+                    <div>
+                        <div class="col-md-6">
+                            <div class="single_abouts_text text-center wow slideInLeft" data-wow-duration="1s">
+                                <img src="/static/assets/images/ab.jpg" alt="" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="single_abouts_text wow slideInRight" data-wow-duration="1s">
+
+                                <h4 class="text-center">Günün Yemeği</h4>
+
+                           <table border="5px" bordercolor="#E7A331" width="100%"  table-layout="fixed" border-collapse="separate">
+  {% for food in top %}
+                          {% if forloop.counter == 1 or forloop.counter == 3 %}
+                              <tr border="5px" bordercolor="#E7A331" >
+
+                                {% endif %}
+
+                                <td width="50%" ><h5 style="color: darkorange ;font-family:Pacifico  ">GÜNÜN {{ food.cuisine.name|upper }} YEMEĞİ </h5><div  class=" single_portfolio_text">
+
+                                    <img width=250 height=250 src="/media/{{ food.cover }}" alt="" />
+                                    <div class="portfolio_images_overlay text-center">
+                                         <h6 class="product_price">{{ food.cuisine.name }}</h6>
+                                        <h6>{{food.title}}</h6>
+
+                                        <a href="{% url 'food' food.title|slugify food.id %}" class="btn btn-primary">Tarif için tıkla </a>
+                                    </div>
+                                </div></td>
+
+
+                              {% if forloop.counter == 2 or forloop.counter == 4 %}
+                              </tr> {% endif %}
+
+                                {% endfor %}
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock tarif %}
+{% block mutfaklar %}
+<section id="ourPakeg" class="ourPakeg">
+          <div class="container">
+              <div class="main_pakeg_content">
+                  <div class="row">
+
+
+                      <div class="single_pakeg_one text-right wow rotateInDownRight">
+                          <div class="col-md-6 col-md-offset-6 col-sm-8 col-sm-offset-4">
+                              <div class="single_pakeg_text">
+                                  <div class="pakeg_title">
+                                    <h4>Dünya Mutfakları</h4>
+                                   {% block cuisine %}<ul>{%for cuisine in cuisines %}
+                                   <li>
+                                   <a href="{% url 'cuisine' cuisine.name|slugify cuisine.id%}" class="btn btn-primary">{{ cuisine.name }}</a>
+                                 </li>
+                                   {% endfor %}</ul>{% endblock cuisine %}
+                                  </div>
+
+
+
+                              </div>
+                          </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock mutfaklar %}
+{% block blog %}
+{% with categories  as cat_names %}
+{{ block.super }}
+ {% endwith %}
+ {% endblock blog %}
+{% block galeri %}
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <div class="row">
+                    <div style="margin-bottom:-120px"class="portfolio_content text-center  wow fadeIn" data-wow-duration="5s">
+                        <div class="col-md-12">
+                            <div class="head_title text-center">
+                                <a href="{%url 'tarif' %}"><h4>Tarifler</h4></a>
+                            </div>
+
+                            <div class="main_portfolio_content">
+                                {% block mavi %} {% include "main/food_list.html" with food_query=foods %} {% endblock mavi %}
+                            </div>
+                        </div>
+                    </div>
+                    </div></div>
+                  <div class="row">
+
+                    <div class="text-right"  >
+                        <a href="{%url 'tarif' %}"> <h4> Diğer Tarifler </h4> </a>  <a  href="{%url 'tarif' %}">  <img src="/static/assets/images/next.png"> </a>
+
+                    </div>
+                    </div>
+
+        </section>
+{% endblock galeri %}
+

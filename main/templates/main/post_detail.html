@@ -1,0 +1,122 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block page_title %}
+  {{ food.title }}
+{% endblock page_title %}
+
+{% block menu %}
+            <div class="main_menu_bg">
+                <div class="container">
+                    <div class="row">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <!-- Brand and toggle get grouped for better mobile display -->
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                    <a class="navbar-brand our_logo" href="#"><img src="/static/assets/images/logo.png" alt="" /></a>
+                                </div>
+
+                                <!-- Collect the nav links, forms, and other content for toggling -->
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="/#slider">Anasayfa</a></li>
+                                        <li><a href="/#abouts">Günün Yemeği</a></li>
+                                        <li><a href="/#ourPakeg">Dünya Mutfakları</a></li>
+                                        <li><a href="/#mobaileapps">Kategoriler</a></li>
+                                        <li><a href="/#portfolio">Tarifler</a></li>
+
+                                        <li><a href="/#footer_widget">İletişim</a></li>
+                                    </ul>
+                                </div><!-- /.navbar-collapse -->
+                            </div><!-- /.container-fluid -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+{% endblock menu %}
+
+{% block galeri %}
+    <section id="abouts" class="abouts">
+            <div class="container">
+                <div class="row">
+                    <div class="abouts_content">
+                        <div class="row">
+                        <div class="col-md-4">
+                           <div class="single_abouts_text text-center wow slideInLeft" data-wow-duration="1s">
+                             <img width="400" height="400" class="media-object" src="/media/{{ food.cover }}" alt="...">
+                             </div>
+                         </div>
+                        <div class="col-md-8">
+                         <div class="media-right">
+                              <a href="{% url 'food' food.title|slugify food.id %}"> </a>
+                         </div>
+
+                        <h4 class="media-heading">{{ food.title }}</h4>
+                        <h7> <span class="label label-info" style="float:left">{{food.get_cat_name }}</span></h7>
+                        <h5>{{food.preparation_time}} </h5>
+                        <h6> Malzemeler  </h6>
+                        <p>{{ food.ingredients }}</p>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div style="text-align: center"> <h6 align="bottom" > Nasıl yaparım ? </h6>
+                            <p>{{ food.recipes }}</p>
+                        </div>
+                        </div>
+ </div>
+                </div>
+           </div>
+
+    </section>
+{% endblock galeri %}
+
+{% block tarif %}{% endblock tarif %}
+{% block kimene %}{% endblock kimene %}
+{% block mutfaklar %}{% endblock mutfaklar %}
+
+{% block blog %}
+   <section id="mobaileapps" class="mobailapps">
+            <div class="slider_overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="main_mobail_apps_content wow zoomIn">
+                            <div class="col-md-6 col-sm-12 text-center">
+                                <img src="/static/assets/images/kat.jpg" alt="" />
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="single_monail_apps_text">
+                                    <h4> {{post.seo_title}} </h4>
+                                  <h2> {{post.title}}  </h2>
+                                  <p>{{post.author}}tarafından {{post.published}} yazıldı. </p>
+                                  <hr>
+                                  {{post.content|linebreaks }}
+                                  <hr>
+                                  <h1>Yorumunu bizlerle paylaş  </h1>
+                                  <p> Toplam yorum sayısı {{post.comments.count }} </p>
+                                  <a href="  {%url  'blog:add_comment' slug=post.slug %}"> yorum yaz</a>
+                                  {% for comment in post.comments.all %}
+                                  <p> {{comment.created }}</p>
+                                  <p> {{comment.user }}</p>
+                                   <p> {{comment.body }}</p>
+                                   {% empty  %}
+                                    <p> henüz hiç yorum yapılmadı </p>
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+{% endblock blog %}
+{% block footer %}{% endblock footer %}

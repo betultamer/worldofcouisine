@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Forms</title>
+    <style>
+        body {
+           margin-bottom: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<h3>Comment Form</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form2 }}
+    </table>
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>

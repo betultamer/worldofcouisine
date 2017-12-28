@@ -1,0 +1,42 @@
+{% extends "main/base.html" %}
+
+{% block galeri %}
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class=" text-center  wow fadeIn" data-wow-duration="5s">
+                <div class="col-md-12" style="margin-bottom:100px">
+                    <div class="head_title text-center" style="margin-top:100px">
+                        <h4>{% block page_title %}{{cuisine.name }} {% endblock page_title %} </h4>
+                    </div>
+
+                      {% include "main/food_list.html" with food_query=cuisine.food_set.all  %}
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock galeri %}
+
+{% block mutfaklar %}
+
+{% endblock mutfaklar %}
+
+{% block kimene %}
+{% endblock kimene %}
+
+{% block tarif %}
+{% endblock tarif %}
+
+{% block blog %}
+
+
+
+{% endblock blog %}
+
+
+{% block footer %}
+{% endblock footer %}
